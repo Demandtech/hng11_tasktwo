@@ -12,7 +12,6 @@ const sequelize = new Sequelize(
 		host: config.db_host,
 		port: config.db_port,
 		dialect: "postgres",
-		dialectModule: require("pg"),
 	}
 );
 
