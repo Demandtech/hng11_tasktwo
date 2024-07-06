@@ -14,7 +14,7 @@ app.use("/api/users", userRoute);
 app.use("/api/organizations", organizationRoute);
 
 app.get("/", (_, res) => {
-	res.json({ message: "Welcome to HNG11 task two" });
+	res.json({ message: "Welcome to HNG11 Backend task two" });
 });
 
 app.get("*", (_, res) => {

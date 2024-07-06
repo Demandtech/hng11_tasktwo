@@ -29,37 +29,6 @@ Object.keys(models).forEach((modelName) => {
 	}
 });
 
-// User.associate(models);
-// Organization.associate(models);
-
-// User.associate = (models) => {
-// 	User.hasOne(models.Organization, {
-// 		foreignKey: "ownerId",
-// 		as: "createdOrganization",
-// 	});
-
-// 	User.belongsToMany(models.Organization, {
-// 		through: models.UserOrganizations,
-// 		as: "joinedOrganizations",
-// 		foreignKey: "userId",
-// 		otherKey: "orgId",
-// 	});
-// };
-
-// Organization.associate = (models) => {
-// 	Organization.belongsTo(models.User, {
-// 		foreignKey: "ownerId",
-// 		as: "creator",
-// 	});
-
-// 	Organization.belongsToMany(models.User, {
-// 		through: models.UserOrganizations,
-// 		as: "members",
-// 		foreignKey: "orgId",
-// 		otherKey: "userId",
-// 	});
-// };
-
 sequelize
 	.authenticate()
 	.then(() => {
