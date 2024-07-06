@@ -3,6 +3,7 @@ import config from "../config.js";
 import UserModel from "./user.model.js";
 import OrgModel from "./organization.model.js";
 import UserOrganizationsModel from "./userOrganization.model.js";
+import pg from "pg";
 
 const sequelize = new Sequelize(
 	config.db_name,
@@ -12,6 +13,7 @@ const sequelize = new Sequelize(
 		host: config.db_host,
 		port: config.db_port,
 		dialect: "postgres",
+		dialectModule: pg,
 	}
 );
 
