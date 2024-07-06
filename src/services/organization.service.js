@@ -3,6 +3,7 @@ import db from "../models/index.js";
 
 const Organization = db.Organization;
 const UserOrganization = db.UserOrganizations;
+
 export async function userOrganizations(authId) {
 	try {
 		const ownedOrgs = await Organization.findAll({
@@ -17,7 +18,8 @@ export async function userOrganizations(authId) {
 			nest: true,
 		});
 
-		const joinedOrganizations = joinedOrgs.map((join) => join.organization);
+		const joinedOrganizations = joinedOrgs.map((join) => join.Organization);
+
 
 		let allOrgs = [...ownedOrgs, ...joinedOrganizations];
 
@@ -31,6 +33,7 @@ export async function userOrganizations(authId) {
 
 		return { status: "success", message: "User organizations", data: allOrgs };
 	} catch (err) {
+		console.log(err);
 		throw new ErrorAndStatus(
 			"Could not fetch organizations",
 			err.status || 500
@@ -79,7 +82,22 @@ export async function createOrganization(data) {
 			data: newOrg,
 		};
 	} catch (err) {
-		console.log(err)
+		throw new ErrorAndStatus(
+			err.message || "Internal server error",
+			err.status || 500
+		);
+	}
+}
+
+export async function joinOrganization({ userId, orgId }) {
+	try {
+		await UserOrganization.create({ userId, orgId });
+
+		return {
+			status: "success",
+			message: "User added to organisation successfully",
+		};
+	} catch (err) {
 		throw new ErrorAndStatus(
 			err.message || "Internal server error",
 			err.status || 500

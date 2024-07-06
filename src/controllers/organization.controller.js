@@ -2,6 +2,7 @@ import {
 	userOrganizations,
 	singleOrganization,
 	createOrganization,
+	joinOrganization,
 } from "../services/organization.service.js";
 
 export async function handleUserOrganizations(req, res) {
@@ -60,15 +61,42 @@ export async function handleCreateOrganization(req, res) {
 		throw new Error();
 	}
 	try {
-		const result = await createOrganization({ name, description, ownerId: authId });
+		const result = await createOrganization({
+			name,
+			description,
+			ownerId: authId,
+		});
 
 		res.status(201).json(result);
-		
 	} catch (err) {
 		res.status(400).json({
 			status: "Bad Request",
 			message: "Client error",
 			statusCode: 400,
+		});
+	}
+}
+
+export async function handleJoinOrganization(req, res) {
+	const { userId } = req.body;
+	const { orgId } = req.params;
+
+	if (!userId || !orgId) {
+		return res.status(400).json({
+			status: "failed",
+			message: "user Id and organization id are required",
+		});
+	}
+
+	try {
+		const result = await joinOrganization({ userId, orgId });
+
+		res.status(200).json(result);
+
+	} catch (err) {
+		res.status(500).json({
+			status: "failed",
+			message: "Internal server error, please try again later!",
 		});
 	}
 }

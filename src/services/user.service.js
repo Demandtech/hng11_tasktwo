@@ -74,9 +74,10 @@ export async function getUser({ userId, authId }) {
 				status: "success",
 				message: "User found in organizations created by auth user",
 				data: userObject,
-				organizationsCreated: userInOwnedOrgs,
+				// organizationsCreated: userInOwnedOrgs,
 			};
 		}
+
 		throw new ErrorAndStatus(
 			"No common organizations or organizations created by auth user found",
 			404
