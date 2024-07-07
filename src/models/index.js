@@ -4,14 +4,17 @@ import UserModel from "./user.model.js";
 import OrgModel from "./organization.model.js";
 import UserOrganizationsModel from "./userOrganization.model.js";
 import pg from "pg";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const sequelize = new Sequelize(
-	config.db_name,
-	config.db_username,
-	config.db_password,
+	config.db_name || "tasktwo",
+	config.db_username || "postgres",
+	config.db_password || "admin",
 	{
-		host: config.db_host,
-		port: config.db_port,
+		host: config.db_host || "localhost",
+		port: config.db_port || 5433,
 		dialect: "postgres",
 		dialectModule: pg,
 	}
@@ -29,23 +32,23 @@ Object.keys(models).forEach((modelName) => {
 	}
 });
 
-sequelize
-	.authenticate()
-	.then(() => {
-		console.log("Connection has been established successfully.");
-	})
-	.catch((error) => {
-		console.log("Error connecting to db", error.message);
-	});
+// sequelize
+// 	.authenticate()
+// 	.then(() => {
+// 		console.log("Connection has been established successfully.");
+// 	})
+// 	.catch((error) => {
+// 		console.log("Error connecting to db", error.message);
+// 	});
 
-sequelize
-	.sync({ force: false })
-	.then(() => {
-		console.log("Tables synced successfully");
-	})
-	.catch((error) => {
-		console.error("Error syncing tables: ", error.message);
-	});
+// sequelize
+// 	.sync({ force: false })
+// 	.then(() => {
+// 		console.log("Tables synced successfully");
+// 	})
+// 	.catch((error) => {
+// 		console.error("Error syncing tables: ", error.message);
+// 	});
 
 export default {
 	sequelize,

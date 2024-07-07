@@ -8,7 +8,7 @@ const generateJWT = (user) => {
 			id: user.userId,
 			sub: user.userId,
 		},
-		config.jwt_secret,
+		config.jwt_secret || "random string",
 		{ expiresIn: "30d" }
 	);
 };
