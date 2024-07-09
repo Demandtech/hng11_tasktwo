@@ -25,7 +25,7 @@ organizationRoute.post(
 	handleCreateOrganization
 );
 organizationRoute.post(
-	"/:orgId/user",
+	"/:orgId/users",
 	validateMiddleware(joinOrgSchema),
 	handleJoinOrganization
 );
