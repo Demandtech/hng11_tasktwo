@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 app.use("/auth", authRoute);
 app.use("/api/users", userRoute);
-app.use("/api/organizations", organizationRoute);
+app.use("/api/organisations", organizationRoute);
 
 app.get("/", (_, res) => {
 	res.json({ message: "Welcome to HNG11 Backend task two" });
