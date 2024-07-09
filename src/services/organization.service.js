@@ -31,7 +31,7 @@ export async function userOrganizations(authId) {
 			};
 		});
 
-		return { status: "success", message: "User organizations", data: allOrgs };
+		return { status: "success", message: "User organisations", data:{ organisations: allOrgs }};
 	} catch (err) {
 		console.log(err);
 		throw new ErrorAndStatus(
